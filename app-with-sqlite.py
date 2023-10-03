@@ -36,7 +36,8 @@ def find_emails(keyword):
         user_emails = [(row[0], row[1]) for row in result]
         if not any(user_emails):
             user_emails = [("Not Found", "Not Found")]
-        return user_emails
+        return user_emails 
+
 
 def insert_email(name,email):
     with app.app_context():
@@ -58,6 +59,7 @@ def insert_email(name,email):
         else:
             response = text(f"User {name} already exist")
         return response
+
 @app.route('/', methods=['GET', 'POST'])
 def emails():
     with app.app_context():
@@ -67,6 +69,7 @@ def emails():
             return render_template('emails.html', name_emails=user_emails, keyword=user_app_name,   show_result=True)
         else:
             return render_template('emails.html', show_result=False)
+
 @app.route('/add', methods=['GET', 'POST'])
 def add_email():
     with app.app_context():
@@ -78,10 +81,9 @@ def add_email():
         else:
             return render_template('add-email.html', show_result=False)
 
-
 # - Add a statement to run the Flask application which can be reached from any host on port 80.
 if __name__=='__main__':
-    app.run(debug=True)
+   # app.run(debug=True)
     app.run(host='0.0.0.0', port=8080)
 
 # https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/
